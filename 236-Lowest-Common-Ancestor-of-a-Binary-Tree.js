@@ -35,7 +35,7 @@ var lowestCommonAncestor = function(root, p, q) {
   }
  if(element==null) element = m.length<n.length ? m[m.length-1] : n[n.length-1]
     //let element = m.length==n.length? m[m.length-2] :m[Math.min(m.length,n.length)-1]
-    console.log(element,m.length,n.length)
+    //console.log(element,m.length,n.length)
     st = [root]
     while(st.length){
         let ele = st.pop()
