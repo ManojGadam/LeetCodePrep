@@ -10,8 +10,6 @@ class TrieNode{
     }
 }
 var longestCommonPrefix = function(arr1, arr2) {
-    arr1 = arr1.map(x=>x.toString())
-    arr2 = arr2.map(x=>x.toString())
     let root = new TrieNode(),ret = 0
     function addToTrie(word){
         let curr = root
@@ -31,11 +29,10 @@ var longestCommonPrefix = function(arr1, arr2) {
         return len
     }
     for(let i of arr1){
-        addToTrie(i)
+        addToTrie(i.toString())
     }
-    //console.log(root)
     for(let i of arr2){
-       ret = Math.max(ret,search(i))
+       ret = Math.max(ret,search(i.toString()))
     }
     return ret
 };
