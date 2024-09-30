@@ -29,7 +29,7 @@ CustomStack.prototype.pop = function() {
  */
 CustomStack.prototype.increment = function(k, val) {
     for(let i=0;i<k;i++){
-        if(i==this.st.length)break
+        if(i==this.st.length)return
         this.st[i] += val
     }
 };
