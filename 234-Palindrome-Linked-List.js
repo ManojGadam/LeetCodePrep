@@ -10,24 +10,21 @@
  * @return {boolean}
  */
 var isPalindrome = function(head) {
-    let f = head,s = head, i =1
-    while(f!=null){
-        if(i%2==0)s =s.next
-        f = f.next
-        i++
+    let fast = head, slow = head
+    while(fast && fast.next){
+        fast = fast.next.next
+        slow = slow.next
     }
-    let curr =s.next,prev = s
-    while(curr!=null){
-        let tmp = curr.next
-        curr.next = s
-        prev.next = tmp
-        s = curr
-        curr = tmp
-        //prev = prev.next
+    let prev = null
+    while(slow){
+        let next = slow.next
+        slow.next = prev
+        prev = slow
+        slow = next
     }
-    while(s!=null){
-        if(s.val!==head.val)return false
-        s = s.next
+    while(prev){
+        if(prev.val!==head.val)return false
+        prev = prev.next
         head = head.next
     }
     return true
