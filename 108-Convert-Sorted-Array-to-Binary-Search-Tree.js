@@ -14,11 +14,10 @@ var sortedArrayToBST = function(arr) {
     let buildBST = (l,r) =>{
         let mid = Math.floor((l+r)/2)
         let root = null
-        if(mid>l-1 && mid<r+1 && arr[mid]!=null){
+        if(mid<l || mid>r)return root
         root = new TreeNode(arr[mid])
         root.left = buildBST(l,mid-1)
         root.right = buildBST(mid+1,r)
-        }
         return root
     }
     return buildBST(0,arr.length-1)
