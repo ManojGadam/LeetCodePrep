@@ -14,13 +14,13 @@ var join = function(arr1, arr2) {
         }
         else{
             if(arr1[i].id == arr2[j].id){
-                for(let key of Object.keys(arr2[j])){
-                    if(key in arr1[i])delete arr1[i][key]
-                }
-                arr2[j] = {...arr2[j],...arr1[i]}
+                // for(let key of Object.keys(arr2[j])){
+                //     if(key in arr1[i])delete arr1[i][key]
+                // }
+                arr2[j] = {...arr1[i],...arr2[j]}
                 i++
             }
-            ret.push(arr2[j])
+                ret.push(arr2[j])
             j++
         }
     }
