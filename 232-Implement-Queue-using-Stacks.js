@@ -28,8 +28,12 @@ MyQueue.prototype.pop = function() {
  * @return {number}
  */
 MyQueue.prototype.peek = function() {
-    if(this.dequeue.length)return this.dequeue[this.dequeue.length-1]
-    return this.enqueue[0]
+    if(!this.dequeue.length){
+    while(this.enqueue.length){
+        this.dequeue.push(this.enqueue.pop())
+    }
+   }
+    return this.dequeue[this.dequeue.length-1]
 };
 
 /**
