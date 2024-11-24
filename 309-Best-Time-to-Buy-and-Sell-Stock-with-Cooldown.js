@@ -8,12 +8,16 @@ var maxProfit = function(prices) {
     function dp(i,state){
         let key = i+\\+state
         if(key in map)return map[key]
-        if(i>prices.length-1 || (i==prices.length-1 && state==0))return 0
+        if(i>prices.length-1)return 0
         if(state == 0){
-            map[key] = Math.max(-prices[i]+dp(i+1,1),dp(i+1,0))
+            let sell = -prices[i]+dp(i+1,1)
+            let cooldown = dp(i+1,0)
+            map[key] = Math.max(sell,cooldown)
         }
         else{
-            map[key] = Math.max(prices[i]+dp(i+2,0),dp(i+1,1))
+            let buy = prices[i]+dp(i+2,0)
+            let cooldown = dp(i+1,1)
+            map[key] = Math.max(buy,cooldown)
         }
         return map[key]
     }
