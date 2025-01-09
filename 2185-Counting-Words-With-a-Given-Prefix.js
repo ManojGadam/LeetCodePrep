@@ -6,7 +6,7 @@
 var prefixCount = function(words, pref) {
     let res=0
     for(let i of words){
-        if(i.slice(0,pref.length)==pref)res++
+        if(i.startsWith(pref))res++
     }
     return res
 };
