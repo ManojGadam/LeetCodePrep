@@ -10,10 +10,10 @@ var minCostConnectPoints = function(points) {
     let ret = 0
     heap.enqueue([0,0])
     //console.log(Object.keys(map).length)
-    while(heap.size() && Object.keys(map).length<points.length){
+    while(Object.keys(map).length<points.length){
         let ele = heap.dequeue()
-        if(!map[ele[1]])ret += ele[0]
-        else continue
+        if(ele[1] in map)continue
+        ret += ele[0]
         map[ele[1]] = 1
         for(let i=0;i<points.length;i++){
                 if(i in map)continue
