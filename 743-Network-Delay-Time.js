@@ -18,7 +18,7 @@ var networkDelayTime = function(times, n, k) {
         if(visit[n1])continue
         visit[n1] = 1
         ret = Math.max(ret,t1)
-        if(!map[n1])continue
+        //if(!map[n1])continue
          for(let [t2,n2] of map[n1]){
             if(!visit[n2])heap.enqueue([t1+t2,n2])
         }
