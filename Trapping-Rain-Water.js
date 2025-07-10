@@ -3,18 +3,19 @@
  * @return {number}
  */
 var trap = function(height) {
-    const lMax = new Array(height.length).fill(0)
-        const rMax = new Array(height.length).fill(0)
-        let ret = 0
-        rMax[height.length-1] = height[height.length-1]
-        lMax[0] = height[0]
-        for(let i=1;i<height.length;i++){
-            lMax[i] = Math.max(height[i],lMax[i-1])
-            rMax[height.length-i-1] = Math.max(height[height.length-i-1],rMax[height.length-i])
+    if(height.length<3)return 0
+    let l=0,r=height.length-1,res = 0,maxL=0,maxR=0
+    while(l<r){
+        if(height[l]<=height[r]){
+            maxL = Math.max(maxL,height[l])
+            res+=maxL-height[l]
+            l++
         }
-        for(let i=0;i<height.length;i++){ 
-            let val = Math.min(lMax[i],rMax[i])-height[i]
-            ret = val>-1 ? ret+val : ret
+        else{
+            maxR = Math.max(maxR,height[r])
+            res+=maxR-height[r]
+            r--
         }
-        return ret
+    }
+    return res
 };
