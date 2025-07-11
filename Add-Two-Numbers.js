@@ -11,31 +11,38 @@
  * @return {ListNode}
  */
 var addTwoNumbers = function(l1, l2) {
-    let c1 = l1, c2 = l2,ret = new ListNode(),curr = ret,carry = 0
-    while(c1 && c2){
-        let sum = c1.val+c2.val+carry
-        curr.next = new ListNode(sum%10)
-        curr = curr.next
-        carry = Math.floor(sum/10)
-        c1 = c1.next
-        c2 = c2.next
+    let carry = 0,curr=new ListNode(),ret = curr,sum = 0
+    while(l1 && l2){
+        sum = l1.val+l2.val+carry
+        if(sum > 9) {
+            carry = 1
+            sum = sum%10
+        }else carry = 0
+        ret.next = new ListNode(sum)
+        ret = ret.next
+        l1 = l1.next
+        l2 = l2.next
     }
-    while(c1 && !c2){
-        let sum = c1.val+carry
-        curr.next = new ListNode(sum%10)
-        curr = curr.next
-        carry = Math.floor(sum/10)
-        c1 = c1.next
+    while(l1 && !l2){
+        sum = l1.val+carry
+        if(sum > 9) {
+            carry = 1
+            sum = sum%10
+        }else carry = 0
+        ret.next = new ListNode(sum)
+        ret = ret.next
+        l1 = l1.next
     }
-    while(c2 && !c1){
-        let sum = c2.val+carry
-        curr.next = new ListNode(sum%10)
-        curr = curr.next
-        carry = Math.floor(sum/10)
-        c2 = c2.next
+    while(l2 && !l1){
+        sum = l2.val+carry
+        if(sum > 9) {
+            carry = 1
+            sum = sum%10
+        }else carry = 0
+        ret.next = new ListNode(sum)
+        ret = ret.next
+        l2 = l2.next
     }
-    if(carry){
-        curr.next = new ListNode(carry)
-    }
-    return ret.next
+    if(carry)ret.next = new ListNode(carry)
+    return curr.next
 };
