@@ -11,21 +11,20 @@
  * @return {number[][]}
  */
 var levelOrder = function(root) {
-    if(!root)return []
-    let qu = [[root,0]],ret = [],curr = 0,tmp = []
-    while(qu.length){
-        const [node,level] = qu.shift()
-        if(curr!=level){
-            curr = level
-            ret.push(tmp.slice())
-            tmp = []
-        }
-        
-        if(node){
-            tmp.push(node.val)
-            qu.push([node.left,level+1])
-            qu.push([node.right,level+1])
+    let st = [[root,0]],ret = [],curr = 0, tmp =[]
+    while(st.length){
+        let [value,lvl] = st.shift()
+        if(value){
+            if(curr != lvl){
+                ret.push(tmp.slice())
+                curr += 1
+                tmp = []
+            }
+            tmp.push(value.val)
+            st.push([value.left,lvl+1])
+            st.push([value.right,lvl+1])
         }
     }
+    if(tmp.length)ret.push(tmp.slice())
     return ret
 };
