@@ -16,9 +16,11 @@ var maxPathSum = function(root) {
         if(!nr)return 0
        // if(!nr.left && !nr.right)return nr.val
         let l = recur(nr.left), r= recur(nr.right)
-        ret = Math.max(nr.val+l+r,nr.val+Math.max(l,r,0),ret)
-        return nr.val+Math.max(l,r,0)
+        l = Math.max(l,0)
+        r = Math.max(r,0)
+        ret = Math.max(nr.val+l+r,ret)
+        return nr.val+Math.max(l,r)
     }
-    ret = Math.max(recur(root),ret)
+    recur(root)
     return ret
 };
