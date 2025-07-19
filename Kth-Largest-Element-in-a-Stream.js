@@ -6,12 +6,8 @@ var KthLargest = function(k, nums) {
     this.heap = new PriorityQueue((a,b)=>a-b)
     this.k = k
     for(let i of nums){
-        if(this.heap.size()>=k){
-            if(i <= this.heap.front())continue
-            this.heap.dequeue()
-            this.heap.enqueue(i)
-        }
-        else this.heap.enqueue(i)
+        this.heap.enqueue(i)
+        if(this.heap.size() > k)this.heap.dequeue()
     }
 };
 
@@ -20,11 +16,10 @@ var KthLargest = function(k, nums) {
  * @return {number}
  */
 KthLargest.prototype.add = function(val) {
-    if(this.heap.size()>=this.k){
-        if(val <= this.heap.front())return this.heap.front()
+    this.heap.enqueue(val)
+    if(this.heap.size()>this.k){
         this.heap.dequeue()
     }
-    this.heap.enqueue(val)
     return this.heap.front()
 };
 
