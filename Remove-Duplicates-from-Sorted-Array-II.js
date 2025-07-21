@@ -10,12 +10,10 @@ var removeDuplicates = function(nums) {
             r++
             count++
         }
-        //console.log(count)
         for(let i=0;i<Math.min(2,count);i++){
             nums[l] = nums[r]
             l++
         }
     }
-    console.log(l)
     return l
 };
