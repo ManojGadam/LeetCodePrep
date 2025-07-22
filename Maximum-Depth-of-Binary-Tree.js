@@ -11,12 +11,11 @@
  * @return {number}
  */
 var maxDepth = function(root) {
-  let max = 0
-  const dfs=(node)=>{
-    if(!node)return 0
-    if(!node.left && !node.right)return 1
-    let l = 1+dfs(node.left), r = 1 + dfs(node.right)
-    return Math.max(l,r)
-  }  
-  return dfs(root)
+    function traverse(head){
+        if(!head)return 0
+        if(!head.left && !head.right)return 1
+       let l = traverse(head.left), r = traverse(head.right)
+       return 1+Math.max(l,r)
+    }
+    return traverse(root)
 };
