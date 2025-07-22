@@ -19,22 +19,19 @@ var rotateRight = function(head, k) {
     }
     k = k>=num ? k%num : k
     if(k == 0)return head
-    let dummy = new ListNode()
-    dummy.next = head
-    let fast= dummy, slow = dummy
-    for(let i=0;i<=k;i++){
+    //  let dummy = new ListNode()
+    //  dummy.next = head
+    let fast= head, slow = head
+    for(let i=0;i<k;i++){
         fast = fast.next
     }
-    while(fast){
+    while(fast.next){
         slow = slow.next
         fast = fast.next
     }
-    let h = slow.next, t =h
-    while(t.next){
-        t = t.next
-    }
+    let h = slow.next
     slow.next = null
-    t.next = head
+    fast.next = head
     head = h
     return head
 };
