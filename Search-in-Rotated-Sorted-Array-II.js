@@ -6,7 +6,7 @@
 var search = function(nums, target) {
     let s=0,e=nums.length-1
     while(s<=e){
-        console.log(s,e)
+        //console.log(s,e)
         let mid = Math.floor((s+e)/2)
         if(nums[mid] == target)return true
         if(nums[mid] == nums[s] && nums[mid] == nums[e]){
