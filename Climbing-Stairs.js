@@ -2,9 +2,16 @@
  * @param {number} n
  * @return {number}
  */
-var climbStairs = function(n,map={}) {
-    if(n in map)return map[n]
-    if(n < 4)return n
-    map[n] = climbStairs(n-2,map)+climbStairs(n-1,map)
-    return map[n]
+var climbStairs = function(n) {
+   function rec(i,map){
+       // console.log(i)
+        if(i in map)return map[i]
+        if(i>n)return 0
+        if( i == n){
+            return 1
+        }
+        map[i] = rec(i+1,map)+rec(i+2,map)
+        return map[i]
+   }
+  return rec(0,{})
 };
