@@ -4,24 +4,26 @@
  * @return {boolean}
  */
 var canFinish = function(numCourses, prerequisites) {
-    const adj = {},visited = {}
-    for(let pre of prerequisites){
-        if(adj[pre[0]])adj[pre[0]].push(pre[1])
-        else adj[pre[0]] = [pre[1]]
+    const adj = {}
+    let inDegree = new Array(numCourses).fill(0)
+    for(let [course,pre] of prerequisites){
+        if(pre in adj)adj[pre].push(course)
+        else adj[pre] = [course]
+        inDegree[course]++
     }
-    function dfs(node){
-        if(!adj[node] || !adj[node].length)return true
-        if(visited[node])return false
-        visited[node] = 1
-        for(let neigh of adj[node]){
-           if(!dfs(neigh))return false
+    let queue = []
+    for(let i=0;i<inDegree.length;i++){
+        if(inDegree[i]==0)queue.push(i)
+    }
+    let count = 0
+    while(queue.length){
+        let ele = queue.shift()
+        count++
+        for(let neigh of (adj[ele] || [])){
+            inDegree[neigh]--
+            if(inDegree[neigh] == 0)queue.push(neigh)
         }
-        delete visited[node]
-        adj[node] = {}
-        return true
     }
-    for(let i=0;i<numCourses;i++){
-        if(!dfs(i))return false
-    }
-    return true
+    
+    return count == numCourses
 };
